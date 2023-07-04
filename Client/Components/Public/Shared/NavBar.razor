@@ -1,4 +1,23 @@
-﻿<h3>NavBar</h3>
+﻿<nav class="navbar nav_underline navbar-expand-lg d-flex navbar-light shadow-no-hover justify-content-between align-items-center pn-lg-3">
+    <a href="/" class="navbar-brand md-f-size-1-5 text-dark ps-2 m-0 mx-lg-5 fn-bold">
+        Mystify CMS 
+    </a>
+
+    <button class="navbar-toggler mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="@HomePageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(HomePageUri) ? "active" : string.Empty)">
+                    Home
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
 
 @code 
 {
