@@ -14,6 +14,11 @@
                     Home
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="@LoginUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(LoginUri) ? "active" : string.Empty)">
+                    Login
+                </a>
+            </li>
         </ul>
 
     </div>
@@ -25,7 +30,7 @@
     [Inject] public NavigationManager NavigationManager { get; set; }
 
     private const string HomePageUri = "/";
-    private const string LoginUri = "/Login";
+    private const string LoginUri = "/login";
 
     private bool IsPageActive(string pageToCheckUri)
     {
