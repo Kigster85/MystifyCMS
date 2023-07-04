@@ -4,7 +4,7 @@
     font-size: 1.25rem;
     color: rgba(0, 0, 0, 0.75); 
     background-color: transparent;
-    border_bottom: 0.2rem solid transparent;
+    border-bottom: 0.2rem solid transparent;
     border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 .navbar-light .navbar-toggler {
@@ -22,6 +22,6 @@
 .active {
     font-size: 1.35rem;
     color: #000;
-    border-bottom: 0.5rem solid transparent;
+    border-bottom: 0.25rem solid transparent;
     border-bottom-color: #000;
 }
