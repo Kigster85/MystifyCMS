@@ -15,6 +15,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="@BlogPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(BlogPageUri) ? "active" : string.Empty)">
+                    Blog
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="@LoginUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(LoginUri) ? "active" : string.Empty)">
                     Login
                 </a>
@@ -31,6 +36,7 @@
 
     private const string HomePageUri = "/";
     private const string LoginUri = "/login";
+    private const string BlogPageUri = "/blog";
 
     private bool IsPageActive(string pageToCheckUri)
     {

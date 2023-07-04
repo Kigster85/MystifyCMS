@@ -7,16 +7,25 @@ body {
 .btn {
     border-radius: 10px;
 }
+.btns{
+    border-radius: 0px;
+}
 .bg1 {
     background-color: aquamarine;
     background-image: linear-gradient(to bottom right, aquamarine, black);
 }
-
+.bg2 {
+    background-color: cornflowerblue;
+    background-image: linear-gradient(to bottom, cornflowerblue, black);
+}
 .card {
+    border-radius: 10px;
+    box-shadow: 0.55rem 0.55rem 1.0rem rgba(0, 0, 0, 0.8) !important;
+}
+.card:hover {
     border-radius: 10px;
     box-shadow: 0.55rem 0.55rem 1.0rem aquamarine !important;
 }
-
 .shadow {
     box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.4) !important;
 }
