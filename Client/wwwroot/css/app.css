@@ -5,11 +5,16 @@ body {
 }
 
 .btn {
-    border-radius: 0px;
+    border-radius: 10px;
 }
-
+.bg1 {
+    background-color: aquamarine;
+}
+bg2{
+    background-color: black;
+}
 .card {
-    border-radius: 0px;
+    border-radius: 10px;
 }
 
 .shadow {
