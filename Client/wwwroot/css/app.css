@@ -9,12 +9,12 @@ body {
 }
 .bg1 {
     background-color: aquamarine;
+    background-image: linear-gradient(to bottom right, aquamarine, black);
 }
-bg2{
-    background-color: black;
-}
+
 .card {
     border-radius: 10px;
+    box-shadow: 0.55rem 0.55rem 1.0rem aquamarine !important;
 }
 
 .shadow {
