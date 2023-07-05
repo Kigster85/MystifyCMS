@@ -22,6 +22,6 @@
 .active {
     font-size: 1.35rem;
     color: #000;
-    border-bottom: 0.25rem solid transparent;
+    border-bottom: 0.20rem solid transparent;
     border-bottom-color: #000;
 }
