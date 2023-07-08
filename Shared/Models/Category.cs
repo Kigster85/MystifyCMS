@@ -13,7 +13,7 @@ namespace Shared.Models
         public string ThumbnailImagePath { get; set; }
 
         [Required]
-        [MaxLength(128]
+        [MaxLength(128)]
 
         public string Name { get; set; }
 
