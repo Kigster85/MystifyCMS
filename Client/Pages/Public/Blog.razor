@@ -25,5 +25,22 @@
 <Client.Components.Public.Shared.Footer />
 
 @code {
+    [Inject]InMemoryDatabaseCache InMemoryDatabaseCache { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        InMemoryDatabaseCache.OnCategoriesDataChanged += StateHasChanged;
+
+        if(InMemoryDatabaseCache.Categories == null)
+        {
+            await InMemoryDatabaseCache.GetCategoriesFromDatabaseAndCache();
+        }
+    }
+    //Unsubscribe from events Dispose(), else we will create a memory leak
+
+    public void Dispose()
+    {
+        InMemoryDatabaseCache.OnCategoriesDataChanged -= StateHasChanged;
+    }
 }
+
