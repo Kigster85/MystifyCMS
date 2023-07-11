@@ -7,6 +7,16 @@ builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlite(
     builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder =>
+        builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -26,6 +36,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
