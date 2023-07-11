@@ -6,7 +6,7 @@ using Shared.Models;
 namespace Server.Controllers
 {
     //routing for the api to display the url
-    [Route("api/[Controller]")]
+    [Route("api/[controller]")]
     //To tell the program it is an api controller which uses http reltated requests
     [ApiController]
 
