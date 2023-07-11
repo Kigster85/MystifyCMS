@@ -5,7 +5,7 @@ namespace Server.Data
 {
     public class AppDBContext : DbContext
     {
-        public DbSet<Category> Catergories { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public AppDBContext(DbContextOptions<AppDBContext> options) :base(options) { }
 
