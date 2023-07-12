@@ -34,18 +34,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
+
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseCors("CorsPolicy");
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
 
 app.UseAuthorization();
 
