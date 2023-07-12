@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 
@@ -5,9 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlite(
     builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddRouting(options => options.LowercaseUrls = true);
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
@@ -17,6 +15,9 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod()
         .AllowAnyHeader());
 });
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -40,6 +41,11 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseCors("CorsPolicy");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.UseAuthorization();
 
