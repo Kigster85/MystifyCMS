@@ -22,8 +22,8 @@ namespace Server.Data
                 {
                     CategoryId = i,
                     ThumbnailImagePath = "uploads/placeholder.jpg",
-                    Name = $"Category [i]",
-                    Description =$"A Description of category [i]"
+                    Name = $"Category {i}",
+                    Description =$"A Description of category {i}"
                 };
             }
 

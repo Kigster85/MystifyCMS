@@ -1,8 +1,9 @@
-﻿<div class="col-md-4 p-3">
+﻿@using global::Shared.Models;
+<div class="col-md-4 p-3">
     <div class="card mb-2">
-        <img src="/uploads/placeholder.jpg" class="card-img-top" alt="Catergory" />
+        <img src="@($"{APIEndpoints.ServerBaseUrl}/{Category.ThumbnailImagePath}")" class="card-img-top" alt="Catergory" />
         <div class="card-body">
-            <h3 class="card-title">Category Name</h3>
+            <h3 class="card-title">@Category.Name</h3>
             <p class="card-text">Category Description</p>
         </div>
 
@@ -10,3 +11,9 @@
     </div>
 </div>
 
+@code
+{
+    [Parameter] public Category Category { get; set; }
+
+
+}
