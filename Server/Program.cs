@@ -36,7 +36,11 @@ if (app.Environment.IsDevelopment())
 app.UseCors("CorsPolicy");
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI( swaggerUIOptions =>
+{
+    swaggerUIOptions.SwaggerEndpoint("/swagger/v1/swagger.json", "Mystify CMS API Server");
+    swaggerUIOptions.RoutePrefix = string.Empty;
+});
 
 app.UseHttpsRedirection();
 
