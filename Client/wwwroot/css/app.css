@@ -207,7 +207,7 @@ body {
     }
 
     50% {
-        transform: scale(1.25) rotateZ(360deg);
+        transform: scale(1.15) rotateZ(360deg);
         
     }
 }
