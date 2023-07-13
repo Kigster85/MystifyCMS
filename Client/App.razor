@@ -6,7 +6,15 @@
     <NotFound>
         <PageTitle>Not found</PageTitle>
         <LayoutView Layout="@typeof(MainLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
+            <NavBar />
+
+            <div class="d-flex flex-column h-100 w-100 justify-content-center align-items-center">
+                <h1 class="mb-3 mt-5">Sorry, that page is not available or is missing!</h1>
+                <p class="mt-2 mb-2">Please check to make sure the URL is correctly spelt.</p>
+                <h1 class="md-f-size-5 mb-5 lds"><i class="far fa-frown"></i></h1>
+            </div>
+
+            <Footer />
         </LayoutView>
     </NotFound>
 </Router>
