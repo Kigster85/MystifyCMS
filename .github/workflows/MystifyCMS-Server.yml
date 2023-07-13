@@ -3,11 +3,11 @@ name: MystifyCMS-Server
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -58,4 +58,3 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.MystifyCMS_Server_C06E }}
         package: .
-
