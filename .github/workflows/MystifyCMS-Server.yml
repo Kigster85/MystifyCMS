@@ -1,48 +1,61 @@
-name: Build and deploy .NET Core application to Web App MystifyCMS-Server
+name: MystifyCMS-Server
+
 on:
   push:
     branches:
-    - main
-env:
-  AZURE_WEBAPP_NAME: MystifyCMS-Server
-  AZURE_WEBAPP_PACKAGE_PATH: Server\publish
-  CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 7.0.x
-  WORKING_DIRECTORY: Server
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - master
+
 jobs:
   build:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: windows-latest
+    name: Build
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
+    - uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
-    - name: Restore
-      run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
-    - name: Build
-      run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
-    - name: Test
-      run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
-    - name: Publish
-      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v3
+        dotnet-version: '7.0.302'
+        include-prerelease: true
+
+    - name: Build and publish
+      run: |
+        cd Server
+        dotnet build --configuration Release
+        dotnet publish --configuration Release --output ${{env.DOTNET_ROOT}}\Server --framework net6.0
+
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
       with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        name: .net-app
+        path: ${{env.DOTNET_ROOT}}\Server
+
   deploy:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: windows-latest
+    name: Deploy
     needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v2
       with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-    - name: Deploy to Azure WebApp
+        name: .net-app
+
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        app-name: MystifyCMS-Server
+        slot-name: 'production'
         publish-profile: ${{ secrets.MystifyCMS_Server_C06E }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        package: .
+
