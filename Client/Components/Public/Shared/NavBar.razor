@@ -13,17 +13,37 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a href="@HomePageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(HomePageUri) ? "active" : string.Empty)">
-                    Home
+                Home
                 </a>
             </li>
             <li class="nav-item">
                 <a href="@BlogPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(BlogPageUri) ? "active" : string.Empty)">
-                    Blog
-                </a>
+                Blog
+                </a>    
             </li>
             <li class="nav-item">
                 <a href="@LoginPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(LoginPageUri) ? "active" : string.Empty)">
-                    Login
+                Login
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@SkillsPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(SkillsPageUri) ? "active" : string.Empty)">
+                Skills
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@PortfolioPageUri" role="button" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(PortfolioPageUri) ? "active" : string.Empty)">
+                Portfolio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@AboutPageUri" role="button" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(AboutPageUri) ? "active" : string.Empty)">
+                About
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@ContactPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(ContactPageUri) ? "active" : string.Empty)">
+                Contact
                 </a>
             </li>
         </ul>
@@ -36,9 +56,16 @@
 
     [Inject] public NavigationManager NavigationManager { get; set; }
 
+    //List of pages within the website and the uri string prefix for them.
+
     private const string HomePageUri = "/";
     private const string LoginPageUri = "/login";
     private const string BlogPageUri = "/blog";
+    private const string SkillsPageUri = "/skills";
+    private const string PortfolioPageUri = "/Portfolio";
+    private const string AboutPageUri = "/about";
+    private const string ContactPageUri = "/contact";
+
 
     private bool IsPageActive(string pageToCheckUri)
     {
