@@ -20,12 +20,16 @@ body {
 }
 .card {
     border-radius: 10px;
+    object-fit: cover;
     box-shadow: 0.55rem 0.55rem 1.0rem rgba(0, 0, 0, 0.8) !important;
 }
-    .card:hover {
-        border-radius: 10px;
-        box-shadow: 0.55rem 0.55rem 1.0rem cornflowerblue !important;
-    }
+.card-body {
+    height: 395px;
+}
+.card:hover {
+    border-radius: 10px;
+    box-shadow: 0.55rem 0.55rem 1.0rem cornflowerblue !important;
+}
 .shadow {
     box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.4) !important;
 }
@@ -38,9 +42,6 @@ body {
     box-shadow: 0 0.15rem 0.4rem rgba(0, 0, 0, 0.8) !important;
 }
 
-.bg-motherboard-dev {
-    background-image: url("../assets/img/publicbackgrounds/bg-motherboard-dev.jpg");
-}
 
 .min-vh-90 {
     min-height: 90vh !important;
@@ -60,9 +61,6 @@ body {
         margin-bottom: 1rem !important;
     }
 
-    .bg-motherboard-dev {
-        background-image: url("../assets/img/publicbackgrounds/bg-motherboard.jpg");
-    }
 }
 
 @media (min-width: 992px) {
@@ -280,3 +278,8 @@ body {
     }
 }
 
+.img--size {
+    width: 414px;
+    height: 232px;
+    object-fit: contain;
+}

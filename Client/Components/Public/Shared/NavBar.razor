@@ -17,14 +17,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="@AboutPageUri" role="button" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(AboutPageUri) ? "active" : string.Empty)">
+                About
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="@BlogPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(BlogPageUri) ? "active" : string.Empty)">
                 Blog
                 </a>    
-            </li>
-            <li class="nav-item">
-                <a href="@LoginPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(LoginPageUri) ? "active" : string.Empty)">
-                Login
-                </a>
             </li>
             <li class="nav-item">
                 <a href="@SkillsPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(SkillsPageUri) ? "active" : string.Empty)">
@@ -37,13 +37,18 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="@AboutPageUri" role="button" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(AboutPageUri) ? "active" : string.Empty)">
-                About
+                <a href="@TrainingPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(TrainingPageUri) ? "active" : string.Empty)">
+                    Training
                 </a>
             </li>
             <li class="nav-item">
                 <a href="@ContactPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(ContactPageUri) ? "active" : string.Empty)">
-                Contact
+                    Contact
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@LoginPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(LoginPageUri) ? "active" : string.Empty)">
+                    Login
                 </a>
             </li>
         </ul>
@@ -65,7 +70,7 @@
     private const string PortfolioPageUri = "/Portfolio";
     private const string AboutPageUri = "/about";
     private const string ContactPageUri = "/contact";
-
+    private const string TrainingPageUri = "/training";
 
     private bool IsPageActive(string pageToCheckUri)
     {
