@@ -26,6 +26,9 @@ body {
 .card-body {
     height: 395px;
 }
+.card-title{
+    padding-bottom:0.8rem !important;
+}
 .card:hover {
     border-radius: 10px;
     box-shadow: 0.55rem 0.55rem 1.0rem cornflowerblue !important;
