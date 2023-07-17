@@ -1,20 +1,48 @@
 ﻿@page "/about"
 
 <NavBar />
-<div class="data-flex p-3 m-3">
-<h1>About</h1>
-<p>
-    I self taught myself HTML back in the early 1990's when the internet was first coming into the household enviroment after my father found a decent guide and used it himself to create
-    a website for my step mother. Even back then i really enjoyed putting together the code and seeing something come to life from it. Due to not finishing school and going on to college as
-    a teenager, i dabbled from career to career trying to figure out what my calling in life was. It wasn't until i lost a job i loved back in 2019 and was streaming on twitch having help
-    from some of my viewers in making a mod and bot for twitch which got my coding interests re-ignited and reminded me of what i was planning on doing if i had gone to college. Because of this
-    i found and located a decent training program and got on to it asap to get fast tracked up to speed with how everything works these days.
+<main class="container min-vh-90 py-nd-5">
+    <div class="top-row p-4 mt-nd-5 shadow-no-hover">
+        <div class="col">
+            <h1 class="text-primary">Who Am I?</h1>
 
-    During the years where i was trying to figure out my place in thhe world a part of me was always still attached and hooked on coding having helped gaming communities i was part of with making and running forums and websites
-    for them, and taking a brief adventure into running my own business which i would still be doing today if i had the knowledge i now have after my course. 
-</p>
+            <h2>Philip Billson, a passionate, problem solving, out of the box thinking .Net Developer</h2>
+            <p class="d-inline-flex">
+                <h2>My Background</h2>
+                I self taught myself HTML back in the early 1990's when the internet was first coming into the household enviroment after my father found a decent guide and used it himself to create
+                a website for my step mother. Even back then i really enjoyed putting together the code and seeing something come to life from it. Due to not finishing school and going on to college as
+                a teenager, i dabbled from career to career trying to figure out what my calling in life was. It wasn't until i lost a job i loved back in 2019 and was streaming on twitch having help
+                from some of my viewers in making a mod and bot for twitch which got my coding interests re-ignited and reminded me of what i was planning on doing if i had gone to college. Because of this
+                i found and located a decent training program and got on to it asap to get fast tracked up to speed with how everything works these days.
 
-</div>
+                During the years where i was trying to figure out my place in thhe world a part of me was always still attached and hooked on coding having helped gaming communities i was part of with making and running forums and websites
+                for them, and taking a brief adventure into running my own business which i would still be doing today if i had the knowledge i now have after my course.
+                <hr />
+                <br />
+                <h2>Direction Moving Forwards</h2>
+                Since spending the time going back into studying an getting back on track with my development skills, i have decided to aim for becoming a Full Stack .Net Developer. I personally like
+                the direction .Net is taking along with the like of ASP.NET, Blazor, and C# as this was one of the languages that i started to fall in love with seeing the game mod being built and what
+                it could do. Also enjoying working on both the front end and back end of a project allows for more enjoyment and product knowledge so in worse case scenarios something breaks on the front or back end,
+                i will be able to hunt down the issue and fix it quickly and effectively.
+
+                <hr />
+
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="assets/docs/Resume_PB.pdf" download class="btn btn-primary shadow btn-lg d-flex justify-content-center align-items-center my-4">
+                    <i class="fas fa-file-pdf"></i>&nbsp;View resume
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="/portfolio" class="btn btn-secondary shadow btn-lg d-flex justify-content-center align-items-center my-4">
+                    <i class="fas fa-project-diagram"></i>&nbsp;Projects
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
 <Footer />
 
 @code {
