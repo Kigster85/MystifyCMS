@@ -33,8 +33,32 @@ namespace Server.Controllers
         //website.com/api/categories/withposts
 
         [HttpGet("withposts")]
+         public async Task<IActionResult> GetWithPosts()
+        {
+            List<Category> categories = await _appDBContext.Categories
+                .Include(category => category.Posts)
+                .ToListAsync();
 
+            return Ok(categories);
+        }
 
+        //website.com/api/categories/id (1,2,3,4 etc)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            Category category = await GetCategoryByCategoryId(id, false);
+
+            return Ok(category);
+        }
+
+        //website.com/api/categories/id (1,2,3,4 etc)
+        [HttpGet("withposts/{id}")]
+        public async Task<IActionResult> GetWithPosts(int id)
+        {
+            Category category = await GetCategoryByCategoryId(id, true);
+
+            return Ok(category);
+        }
         #endregion
 
         //Utility Methods
