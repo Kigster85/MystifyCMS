@@ -1,33 +1,31 @@
-﻿using AutoMapper;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Shared.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    //routing for the api to display the url
     [Route("api/[controller]")]
-    //To tell the program it is an api controller which uses http reltated requests
     [ApiController]
-
     public class PostsController : ControllerBase
     {
         private readonly AppDBContext _appDBContext;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly IMapper _mapper;
 
-        public PostsController(AppDBContext appDBContext, IWebHostEnvironment webHostEnvironment, IMapper mapper)
+        public PostsController(AppDBContext appDBContext, IWebHostEnvironment webHostEnvironment)
         {
             _appDBContext = appDBContext;
             _webHostEnvironment = webHostEnvironment;
-            _mapper = mapper;
         }
 
-        #region CRUD Operations
+        #region CRUD operations
 
         [HttpGet]
-
         public async Task<IActionResult> Get()
         {
             List<Post> posts = await _appDBContext.Posts
@@ -37,8 +35,7 @@ namespace Server.Controllers
             return Ok(posts);
         }
 
-
-        //website.com/api/posts/id (1,2,3,4 etc)
+        // website.com/api/posts/2
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -47,13 +44,12 @@ namespace Server.Controllers
             return Ok(post);
         }
 
-        
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PostDTO postToCreateDTO)
+        public async Task<IActionResult> Create([FromBody] Post postToCreate)
         {
             try
             {
-                if (postToCreateDTO == null)
+                if (postToCreate == null)
                 {
                     return BadRequest(ModelState);
                 }
@@ -62,8 +58,6 @@ namespace Server.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-
-                Post postToCreate = _mapper.Map<Post>(postToCreateDTO);
 
                 if (postToCreate.Published == true)
                 {
@@ -81,7 +75,7 @@ namespace Server.Controllers
                 }
                 else
                 {
-                    return Created("Create", postToCreateDTO);
+                    return Created("Create", postToCreate);
                 }
             }
             catch (Exception e)
@@ -91,11 +85,11 @@ namespace Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] PostDTO updatedPostDTO)
+        public async Task<IActionResult> Update(int id, [FromBody] Post updatedPost)
         {
             try
             {
-                if (id < 1 || updatedPostDTO == null || id != updatedPostDTO.PostId)
+                if (id < 1 || updatedPost == null || id != updatedPost.PostId)
                 {
                     return BadRequest(ModelState);
                 }
@@ -111,8 +105,6 @@ namespace Server.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-
-                Post updatedPost = _mapper.Map<Post>(updatedPostDTO);
 
                 if (oldPost.Published == false && updatedPost.Published == true)
                 {
@@ -191,10 +183,8 @@ namespace Server.Controllers
             }
         }
 
-
         #endregion
 
-        //Utility Methods
         #region Utility methods
 
         [NonAction]
@@ -216,7 +206,6 @@ namespace Server.Controllers
 
             return postToGet;
         }
-
 
         #endregion
     }
