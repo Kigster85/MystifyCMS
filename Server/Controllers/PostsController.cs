@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Shared.Models;
@@ -14,11 +15,13 @@ namespace Server.Controllers
     {
         private readonly AppDBContext _appDBContext;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IMapper _mapper;
 
-        public PostsController(AppDBContext appDBContext, IWebHostEnvironment webHostEnvironment)
+        public PostsController(AppDBContext appDBContext, IWebHostEnvironment webHostEnvironment, IMapper mapper)
         {
             _appDBContext = appDBContext;
             _webHostEnvironment = webHostEnvironment;
+            _mapper = mapper;
         }
 
         #region CRUD Operations
@@ -46,11 +49,11 @@ namespace Server.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Post postToCreate)
+        public async Task<IActionResult> Create([FromBody] PostDTO postToCreateDTO)
         {
             try
             {
-                if (postToCreate == null)
+                if (postToCreateDTO == null)
                 {
                     return BadRequest(ModelState);
                 }
@@ -59,6 +62,8 @@ namespace Server.Controllers
                 {
                     return BadRequest(ModelState);
                 }
+
+                Post postToCreate = _mapper.Map<Post>(postToCreateDTO);
 
                 if (postToCreate.Published == true)
                 {
@@ -76,7 +81,7 @@ namespace Server.Controllers
                 }
                 else
                 {
-                    return Created("Create", postToCreate);
+                    return Created("Create", postToCreateDTO);
                 }
             }
             catch (Exception e)
@@ -86,11 +91,11 @@ namespace Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Post updatedPost)
+        public async Task<IActionResult> Update(int id, [FromBody] PostDTO updatedPostDTO)
         {
             try
             {
-                if (id < 1 || updatedPost == null || id != updatedPost.PostId)
+                if (id < 1 || updatedPostDTO == null || id != updatedPostDTO.PostId)
                 {
                     return BadRequest(ModelState);
                 }
@@ -106,6 +111,8 @@ namespace Server.Controllers
                 {
                     return BadRequest(ModelState);
                 }
+
+                Post updatedPost = _mapper.Map<Post>(updatedPostDTO);
 
                 if (oldPost.Published == false && updatedPost.Published == true)
                 {
