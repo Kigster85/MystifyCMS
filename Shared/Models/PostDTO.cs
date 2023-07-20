@@ -8,12 +8,11 @@ namespace Shared.Models
         public int PostId { get; set; }
 
         [Required]
-        [MaxLength(120)]
+        [MaxLength(128)]
         public string Title { get; set; }
 
         [Required]
         [MaxLength(256)]
-
         public string ThumbnailImagePath { get; set; }
 
         [Required]
@@ -33,8 +32,5 @@ namespace Shared.Models
 
         [Required]
         public int CategoryId { get; set; }
-
-
-
     }
 }
