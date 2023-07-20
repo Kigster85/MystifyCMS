@@ -27,41 +27,24 @@ namespace Server.Controllers
 
         public async Task<IActionResult> Get()
         {
-            List<Post> posts = await _appDBContext.Posts.ToListAsync();
-
-            return Ok(posts);
-        }
-
-        //website.com/api/posts/withposts
-
-        [HttpGet("withposts")]
-        public async Task<IActionResult> GetWithPosts()
-        {
             List<Post> posts = await _appDBContext.Posts
-                .Include(post => post.Posts)
+                .Include(post => post.Category)
                 .ToListAsync();
 
             return Ok(posts);
         }
 
+
         //website.com/api/posts/id (1,2,3,4 etc)
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            Post post = await GetPostByPostId(id, false);
+            Post post = await GetPostByPostId(id);
 
             return Ok(post);
         }
 
-        //website.com/api/posts/id (1,2,3,4 etc)
-        [HttpGet("withposts/{id}")]
-        public async Task<IActionResult> GetWithPosts(int id)
-        {
-            Post post = await GetPostByPostId(id, true);
-
-            return Ok(post);
-        }
-
+        
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Post postToCreate)
         {
@@ -71,17 +54,25 @@ namespace Server.Controllers
                 {
                     return BadRequest(ModelState);
                 }
+
                 if (ModelState.IsValid == false)
                 {
                     return BadRequest(ModelState);
                 }
+
+                if (postToCreate.Published == true)
+                {
+                    // European DateTime
+                    postToCreate.PublishDate = DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm");
+                }
+
                 await _appDBContext.Posts.AddAsync(postToCreate);
 
                 bool changesPersistedToDatabase = await PersistChangesToDatabase();
 
                 if (changesPersistedToDatabase == false)
                 {
-                    return StatusCode(500, "Something went wrong on our side. Please Contact the Administrator.");
+                    return StatusCode(500, "Something went wrong on our side. Please contact the administrator.");
                 }
                 else
                 {
@@ -90,7 +81,7 @@ namespace Server.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}");
+                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}.");
             }
         }
 
@@ -104,16 +95,25 @@ namespace Server.Controllers
                     return BadRequest(ModelState);
                 }
 
-                bool exists = await _appDBContext.Posts.AnyAsync(post => post.PostId == id);
+                Post oldPost = await _appDBContext.Posts.FindAsync(id);
 
-                if (exists == false)
+                if (oldPost == null)
                 {
                     return NotFound();
                 }
+
                 if (ModelState.IsValid == false)
                 {
                     return BadRequest(ModelState);
                 }
+
+                if (oldPost.Published == false && updatedPost.Published == true)
+                {
+                    updatedPost.PublishDate = DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm");
+                }
+
+                // Detach oldPost from EF, else it can't be updated.
+                _appDBContext.Entry(oldPost).State = EntityState.Detached;
 
                 _appDBContext.Posts.Update(updatedPost);
 
@@ -121,16 +121,16 @@ namespace Server.Controllers
 
                 if (changesPersistedToDatabase == false)
                 {
-                    return StatusCode(500, "Something went wrong on our side. Please Contact the Administrator.");
+                    return StatusCode(500, "Something went wrong on our side. Please contact the administrator.");
                 }
                 else
                 {
-                    return NoContent();
+                    return Created("Create", updatedPost);
                 }
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}");
+                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}.");
             }
         }
 
@@ -150,27 +150,28 @@ namespace Server.Controllers
                 {
                     return NotFound();
                 }
+
                 if (ModelState.IsValid == false)
                 {
                     return BadRequest(ModelState);
                 }
-                Post postToDelete = await GetPostByPostId(id, false);
+
+                Post postToDelete = await GetPostByPostId(id);
 
                 if (postToDelete.ThumbnailImagePath != "uploads/placeholder.jpg")
                 {
+                    string fileName = postToDelete.ThumbnailImagePath.Split('/').Last();
 
-                    string filename = postToDelete.ThumbnailImagePath.Split('/').Last();
-
-                    System.IO.File.Delete($"{_webHostEnvironment.ContentRootPath}\\wwwroot\\uploads\\{filename}");
-
+                    System.IO.File.Delete($"{_webHostEnvironment.ContentRootPath}\\wwwroot\\uploads\\{fileName}");
                 }
+
                 _appDBContext.Posts.Remove(postToDelete);
 
                 bool changesPersistedToDatabase = await PersistChangesToDatabase();
 
                 if (changesPersistedToDatabase == false)
                 {
-                    return StatusCode(500, "Something went wrong on our side. Please Contact the Administrator.");
+                    return StatusCode(500, "Something went wrong on our side. Please contact the administrator.");
                 }
                 else
                 {
@@ -179,9 +180,10 @@ namespace Server.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}");
+                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}.");
             }
         }
+
 
         #endregion
 
@@ -196,29 +198,18 @@ namespace Server.Controllers
 
             return amountOfChanges > 0;
         }
+
         [NonAction]
         [ApiExplorerSettings(IgnoreApi = true)]
-        private async Task<Post> GetPostByPostId(int postId, bool withPosts)
+        private async Task<Post> GetPostByPostId(int postId)
         {
-            Post postToGet = null;
-
-            if (withPosts == true)
-            {
-                postToGet = await _appDBContext.Posts
-                    .Include(post => post.Posts)
+            Post postToGet = await _appDBContext.Posts
+                    .Include(post => post.Category)
                     .FirstAsync(post => post.PostId == postId);
-            }
-            else
-            {
-                postToGet = await _appDBContext.Posts
-                    .FirstAsync(post => post.PostId == postId);
-            }
 
             return postToGet;
-
-
-
         }
+
 
         #endregion
     }
