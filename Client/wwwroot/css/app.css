@@ -18,6 +18,20 @@ body {
     background-color: cornflowerblue;
     background-image: linear-gradient(to bottom, cornflowerblue, black);
 }
+.admin-area-main{
+    display:flex;
+    flex-wrap: nowrap;
+    height:100vh;
+    max-height:100vh;
+    overflow-x: auto;
+    overflow-y: auto;
+    background-color:cadetblue;
+}
+.admin-content-area{
+    overflow-y: scroll;
+    padding:10vh;
+}
+
 .card {
     border-radius: 10px;
     object-fit: cover;
