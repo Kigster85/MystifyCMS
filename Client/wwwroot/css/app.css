@@ -18,6 +18,15 @@ body {
     background-color: cornflowerblue;
     background-image: linear-gradient(to bottom, cornflowerblue, black);
 }
+
+.bg-lightgray {
+    background-color: #EBEBEB;
+}
+
+.hover-bg-white:hover {
+    background-color: #FFF;
+}
+
 .admin-area-main{
     display:flex;
     flex-wrap: nowrap;
@@ -72,10 +81,15 @@ body {
     font-size: 3rem;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 992px)
+{
     .md-and-smaller-my-3 {
         margin-top: 1rem !important;
         margin-bottom: 1rem !important;
+    }
+
+    .md-and-smaller-d-none {
+        display: none !important;
     }
 
 }
