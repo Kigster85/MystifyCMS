@@ -1,5 +1,42 @@
-﻿<h3>Sidebar</h3>
+﻿@code 
+{
+    [Inject] NavigationManager NavigationManager { get; set; }
 
-@code {
+    private const string AdminIndexPageUri = "/admin";
+
+    private static string s_adminCategoriesPageUri = $"{AdminIndexPageUri}/categories";
+    private static string s_adminPostsPageUri = $"{AdminIndexPageUri}/posts";
+
+    private bool IsPageActive(string pageToCheckUri)
+    {
+        //Skip(3) to bypass the Https://
+        string[] currentUriSplitBetweenSlashes = NavigationManager.Uri.Split('/').Skip(2).ToArray();
+
+        if (pageToCheckUri == AdminIndexPageUri)
+        {
+            if (currentUriSplitBetweenSlashes.Last() == "admin")
+            {
+                return true;
+            }
+        }
+        else
+        {
+            string[] pageToCheckUriSplitBetweenSlashes = pageToCheckUri.Split('/').Skip(2).ToArray();
+
+            foreach (string currentUriPart in currentUriSplitBetweenSlashes)
+            {
+                foreach (string pageToCheckUriPart in pageToCheckUriSplitBetweenSlashes)
+                {
+                    if (pageToCheckUriPart == currentUriPart)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+        }
+        // If the code reaches here pageToCheckUri is not the active page, so return False
+        return false;
+    }
 
 }
