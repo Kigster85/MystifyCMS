@@ -18,6 +18,29 @@ body {
     background-color: cornflowerblue;
     background-image: linear-gradient(to bottom, cornflowerblue, black);
 }
+
+.bg-lightgray {
+    background-color: #EBEBEB;
+}
+
+.hover-bg-white:hover {
+    background-color: #FFF;
+}
+
+.admin-area-main{
+    display:flex;
+    flex-wrap: nowrap;
+    height:100vh;
+    max-height:100vh;
+    overflow-x: auto;
+    overflow-y: auto;
+    background-color:cadetblue;
+}
+.admin-area-content{
+    overflow-y: scroll;
+    padding:10vh;
+}
+
 .card {
     border-radius: 10px;
     object-fit: cover;
@@ -45,7 +68,46 @@ body {
     box-shadow: 0 0.15rem 0.4rem rgba(0, 0, 0, 0.8) !important;
 }
 
-
+.w-8{
+    width: 8%;
+}
+.w-14 {
+    width: 14%;
+}
+.w-15 {
+    width: 15%;
+}
+.w-35 {
+    width: 35%;
+}
+.w-40 {
+    width: 40%;
+}
+.flex--shrink-1{
+    flex-shrink: 1;
+}
+.z-index-5{
+    z-index: 5;
+}
+.btn-update{
+    color:#FFF;
+    background-color:#cfb300;
+    border-color: #cfb300;
+}
+.btn-update:hover {
+    color: #FFF;
+    background-color: #a68f00;
+    border-color: #a68f00;
+}
+.admin-index-thumbnail-image{
+    display: block;
+    width: 100%;
+    height:auto;
+}
+.admin-crud-form-thumbnail-image {
+    display: block;
+    width: 50%;
+}
 .min-vh-90 {
     min-height: 90vh !important;
 }
@@ -58,10 +120,15 @@ body {
     font-size: 3rem;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 992px)
+{
     .md-and-smaller-my-3 {
         margin-top: 1rem !important;
         margin-bottom: 1rem !important;
+    }
+
+    .md-and-smaller-d-none {
+        display: none !important;
     }
 
 }
