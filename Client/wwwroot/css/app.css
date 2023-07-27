@@ -36,7 +36,7 @@ body {
     overflow-y: auto;
     background-color:cadetblue;
 }
-.admin-content-area{
+.admin-area-content{
     overflow-y: scroll;
     padding:10vh;
 }
