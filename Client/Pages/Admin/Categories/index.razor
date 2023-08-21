@@ -148,7 +148,6 @@
 
                 HttpResponseMessage response = await HttpClient.DeleteAsync($"{APIEndpoints.s_categories}/{categoryToDelete.CategoryId}");
 
-            }
             if (response.StatusCode == HttpStatusCode.NoContent)
             {
                 if(InMemoryDatabaseCache.Categories.Remove(categoryToDelete))
