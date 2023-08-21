@@ -16,8 +16,8 @@
                 <br />
 				@if (InMemoryDatabaseCache.Categories == null)
 				{
-					<div class="spinner-grow text-secondary" role="status">
-						<span class="sr-only">Loading...</span>
+					<div role="status">
+						<Loading />
 					</div>
 				}
 				else
@@ -107,4 +107,32 @@
     }
 
     public void Dispose() => InMemoryDatabaseCache.OnCategoriesDataChanged -= StateHasChanged;
+
+    [Inject] HttpClient HttpClient { get; set; }
+    private bool _attemptingToDeleteACategory = false;
+    private bool _successfullyDeletedACategory = false;
+    private bool _unsucessfullyTriedToDeleteCategory = false;
+    private string _reasonUnsuccessfullyTriedToDeleteACategory = null;
+    private async void DeleteCategory(Category categoryToDelete)
+    {
+        if (categoryToDelete.Posts != null && categoryToDelete.Posts.Count != 0)
+        {
+            string postTitlesThatMustBeDeletedFirst = string.Empty;
+
+            for(int i = 0; i < categoryToDelete.Posts.Count; i++)
+            {
+                if(i== categoryToDelete.Posts.Count - 1)
+                {
+                    //Last iteration
+                    postTitlesThatMustBeDeletedFirst += $"\"{categoryToDelete.Posts[i].Title}\"";
+                }
+                else if (i == categoryToDelete.Posts.Count - 2)
+                {
+                    //Second Last iteration
+                    postTitlesThatMustBeDeletedFirst += $"\"{categoryToDelete.Posts[i].Title}\" and ";
+
+                }
+            }
+        }
+    }
 }
