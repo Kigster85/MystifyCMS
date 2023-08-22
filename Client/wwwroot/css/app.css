@@ -1,61 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,400&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,400&display=swap');
 
-body {
-    font-family: 'Roboto', sans-serif;
-}
+/* Table of Contents
+     1. General
+     2. Backgrounds
+     3. Typography
+     4. Components (buttons, cards etc.)
+     5. Custom responsive styles
+     6. Admin area
+     7. QuillJS
+     8. Blazor default styles
+*/
 
-.btn {
-    border-radius: 10px;
-}
-.btns{
-    border-radius: 0px;
-}
-.bg1 {
-    background-color: aquamarine;
-    background-image: linear-gradient(to bottom right, aquamarine, black);
-}
-.bg2 {
-    background-color: cornflowerblue;
-    background-image: linear-gradient(to bottom, cornflowerblue, black);
-}
-
-.bg-lightgray {
-    background-color: #EBEBEB;
-}
-
-.hover-bg-white:hover {
-    background-color: #FFF;
-}
-
-.admin-area-main{
-    display:flex;
-    flex-wrap: nowrap;
-    height:100vh;
-    max-height:100vh;
-    overflow-x: auto;
-    overflow-y: auto;
-    background-color:cadetblue;
-}
-.admin-area-content{
-    overflow-y: scroll;
-    padding:10vh;
-}
-
-.card {
-    border-radius: 10px;
-    object-fit: cover;
-    box-shadow: 0.55rem 0.55rem 1.0rem rgba(0, 0, 0, 0.8) !important;
-}
-.card-body {
-    height: 395px;
-}
-.card-title{
-    padding-bottom:0.8rem !important;
-}
-.card:hover {
-    border-radius: 10px;
-    box-shadow: 0.55rem 0.55rem 1.0rem cornflowerblue !important;
-}
+/* 1. General */
 .shadow {
     box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.4) !important;
 }
@@ -68,69 +24,118 @@ body {
     box-shadow: 0 0.15rem 0.4rem rgba(0, 0, 0, 0.8) !important;
 }
 
-.w-8{
+.w-8 {
     width: 8%;
 }
+
 .w-14 {
     width: 14%;
 }
+
 .w-15 {
     width: 15%;
 }
+
 .w-35 {
     width: 35%;
 }
+
 .w-40 {
     width: 40%;
 }
-.flex--shrink-1{
+
+.flex-shrink-1 {
     flex-shrink: 1;
 }
-.z-index-5{
+
+.z-index-5 {
     z-index: 5;
 }
-.btn-update{
-    color:#FFF;
-    background-color:#cfb300;
-    border-color: #cfb300;
-}
-.btn-update:hover {
-    color: #FFF;
-    background-color: #a68f00;
-    border-color: #a68f00;
-}
-.admin-index-thumbnail-image{
-    display: block;
-    width: 100%;
-    height:auto;
-}
-.admin-crud-form-thumbnail-image {
-    display: block;
-    width: 50%;
-}
+
 .min-vh-90 {
     min-height: 90vh !important;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+/* 2. Backgrounds */
+.bg-lightgray {
+    background-color: #EBEBEB;
+}
+
+.bg-motherboard-dev {
+    background-image: url("../assets/img/publicbackgrounds/bg-motherboard-dev.jpg");
+}
+
+.hover-bg-white:hover {
+    background-color: #FFF;
 }
 
 .bg-white-94 {
     background-color: rgba(255, 255, 255, 0.94);
 }
 
+/* 3. Typography */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 .f-size-3 {
     font-size: 3rem;
 }
 
-@media (max-width: 992px)
-{
+/* 4. Components (buttons, cards etc.) */
+.btn {
+    border-radius: 0px;
+}
+
+.card {
+    border-radius: 0px;
+}
+
+.btn-update {
+    color: #FFF;
+    background-color: #cfb300;
+    border-color: #cfb300;
+}
+
+    .btn-update:hover {
+        color: #FFF;
+        background-color: #a68f00;
+        border-color: #a68f00;
+    }
+
+.admin-index-thumbnail-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.admin-crud-form-thumbnail-image {
+    display: block;
+    width: 50%;    
+}
+
+.list-group {
+    border-radius: 0px;
+}
+
+/* 5. Custom responsive styles */
+@media (max-width: 992px) {
     .md-and-smaller-my-3 {
         margin-top: 1rem !important;
         margin-bottom: 1rem !important;
     }
 
+    .bg-motherboard-dev {
+        background-image: url("../assets/img/publicbackgrounds/bg-motherboard.jpg");
+    }
+
     .md-and-smaller-d-none {
         display: none !important;
     }
-
 }
 
 @media (min-width: 992px) {
@@ -139,6 +144,39 @@ body {
     }
 }
 
+/* 6. Admin area */
+.admin-area-main {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: auto;
+    background-color: #404040;
+}
+
+.admin-area-content {
+    overflow-y: scroll;
+    padding: 10vw;
+}
+
+/* 7. QuillJS */
+.ql-container.ql-snow {
+    border: none;
+}
+
+.ql-editor {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    padding: 0px;
+}
+
+    .ql-editor .ql-video {
+        width: 640px;
+        height: 360px;
+    }
+
+/* 8. Blazor default styles */
 .validation-message {
     color: red;
 }
@@ -168,188 +206,6 @@ body {
     color: white;
 }
 
-.blazor-error-boundary::after {
-    content: "An error has occurred."
-}
-.lds-default {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin-top: 20%;
-}
-
-    .lds-default div {
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        background: cornflowerblue;
-        border-radius: 50%;
-        animation: lds-default 2s ease-in-out infinite;
+    .blazor-error-boundary::after {
+        content: "An error has occurred."
     }
-
-        .lds-default div:nth-child(1) {
-            animation-delay: 0s;
-            top: 37px;
-            left: 66px;
-        }
-
-        .lds-default div:nth-child(2) {
-            animation-delay: -0.1s;
-            top: 22px;
-            left: 62px;
-        }
-
-        .lds-default div:nth-child(3) {
-            animation-delay: -0.2s;
-            top: 11px;
-            left: 52px;
-        }
-
-        .lds-default div:nth-child(4) {
-            animation-delay: -0.3s;
-            top: 7px;
-            left: 37px;
-        }
-
-        .lds-default div:nth-child(5) {
-            animation-delay: -0.4s;
-            top: 11px;
-            left: 22px;
-        }
-
-        .lds-default div:nth-child(6) {
-            animation-delay: -0.5s;
-            top: 22px;
-            left: 11px;
-        }
-
-        .lds-default div:nth-child(7) {
-            animation-delay: -0.6s;
-            top: 37px;
-            left: 7px;
-        }
-
-        .lds-default div:nth-child(8) {
-            animation-delay: -0.7s;
-            top: 52px;
-            left: 11px;
-        }
-
-        .lds-default div:nth-child(9) {
-            animation-delay: -0.8s;
-            top: 62px;
-            left: 22px;
-        }
-
-        .lds-default div:nth-child(10) {
-            animation-delay: -0.9s;
-            top: 66px;
-            left: 37px;
-        }
-
-        .lds-default div:nth-child(11) {
-            animation-delay: -1s;
-            top: 62px;
-            left: 52px;
-        }
-
-        .lds-default div:nth-child(12) {
-            animation-delay: -1.1s;
-            top: 52px;
-            left: 62px;
-        }
-
-@keyframes lds-default {
-    0%, 20%, 80%, 100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(2.5);
-    }
-}
-@keyframes lds {
-    0%, 20%, 80%, 100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.15) rotateZ(360deg);
-        
-    }
-}
-.lds div{
-    animation: lds 2s ease-in-out infinite;
-    font-size: 3rem;
-}
-    .lds div:nth-child(1) {
-        animation-delay: 0s;
-    }
-    .lds div:nth-child(2) {
-        animation-delay: 0.2s;
-    }
-    .lds div:nth-child(3) {
-        animation-delay: 0.4s;
-    }
-    .lds div:nth-child(4) {
-        animation-delay: 0.6s;
-    }
-
-.lds-text div {
-    animation: lds-text 2s ease-in-out infinite;
-    font-size: 2rem;
-}
-    .lds-text div:nth-child(1) {
-        animation-delay: 0s;
-    }
-    .lds-text div:nth-child(2) {
-        animation-delay: 0.1s;
-    }
-    .lds-text div:nth-child(3) {
-        animation-delay: 0.2s;
-    }
-    .lds-text div:nth-child(4) {
-        animation-delay: 0.3s;
-    }
-    .lds-text div:nth-child(5) {
-        animation-delay: 0.4s;
-    }
-    .lds-text div:nth-child(6) {
-        animation-delay: 0.5s;
-    }
-    .lds-text div:nth-child(7) {
-        animation-delay: 0.6s;
-    }
-    .lds-text div:nth-child(8) {
-        animation-delay: 0.7s;
-    }
-    .lds-text div:nth-child(9) {
-        animation-delay: 0.8s;
-    }
-    .lds-text div:nth-child(10) {
-        animation-delay: 0.9s;
-    }
-    .lds-text div:nth-child(11) {
-        animation-delay: 1s;
-    }
-    .lds-text div:nth-child(12) {
-        animation-delay: 1.1s;
-    }
-
-    
-@keyframes lds-text {
-    0%, 20%, 80%, 100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.25);
-    }
-}
-
-.img--size {
-    width: 414px;
-    height: 232px;
-    object-fit: contain;
-}
