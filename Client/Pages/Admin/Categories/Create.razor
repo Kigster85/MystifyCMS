@@ -2,7 +2,7 @@
 @using System.Net;
 
 <main class="admin-area-main">
-	<Client.Components.Admin.Sidebar />
+	<Sidebar />
 
 	<div class="admin-area-content container-fluid bg-white">
 		<div class="row g-0">
@@ -13,7 +13,7 @@
 				@if (_attemptingToCreate == true)
 				{
 					<h1>Creating category...</h1>
-					<LoadingDot />
+					<Loading />
 				}
 				else if (_createSuccessful == false && _attemptingToCreate == false)
 				{
@@ -30,7 +30,7 @@
 
 							@if (_attemptingToUploadImage == true)
 							{
-								<LoadingDot />
+								<Loading />
 							}
 							else if (_attemptToUploadFailed == true)
 							{

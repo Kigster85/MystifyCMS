@@ -34,7 +34,7 @@
 
         if(InMemoryDatabaseCache.Categories == null)
         {
-            await InMemoryDatabaseCache.GetCategoriesFromDatabaseAndCache();
+            await InMemoryDatabaseCache.GetCategoriesFromDatabaseAndCache(true);
         }
     }
     //Unsubscribe from events Dispose(), else we will create a memory leak

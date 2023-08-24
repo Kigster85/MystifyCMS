@@ -11,6 +11,81 @@
      8. Blazor default styles
 */
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn {
+    border-radius: 10px;
+}
+
+.btns {
+    border-radius: 0px;
+}
+
+.bg1 {
+    background-color: aquamarine;
+    background-image: linear-gradient(to bottom right, aquamarine, black);
+}
+
+.bg2 {
+    background-color: cornflowerblue;
+    background-image: linear-gradient(to bottom, cornflowerblue, black);
+}
+
+.card {
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0.55rem 0.55rem 1.0rem rgba(0, 0, 0, 0.8) !important;
+}
+
+.card-body {
+    height: 395px;
+}
+
+.card-title {
+    padding-bottom: 0.8rem !important;
+}
+
+.card:hover {
+    border-radius: 10px;
+    box-shadow: 0.55rem 0.55rem 1.0rem cornflowerblue !important;
+}
+
+.shadow {
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.4) !important;
+}
+
+.shadow-no-hover {
+    box-shadow: 0 0.15rem 0.4rem rgba(0, 0, 0, 0.5) !important;
+}
+
+.shadow:hover {
+    box-shadow: 0 0.15rem 0.4rem rgba(0, 0, 0, 0.8) !important;
+}
+
+
+.min-vh-90 {
+    min-height: 90vh !important;
+}
+
+.bg-white-94 {
+    background-color: rgba(255, 255, 255, 0.94);
+}
+
+.f-size-3 {
+    font-size: 3rem;
+}
+
+#informationalModal {
+    animation: fade-in ease-in-out 1s;
+    transition: ease-in-out 1s
+}
+
+.fadein {
+    animation: fade-in ease-in-out 1s;
+    transition: ease-in-out 1s
+}
 /* 1. General */
 .shadow {
     box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.4) !important;
@@ -209,3 +284,213 @@ body {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.lds-default {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-top: 20%;
+}
+
+    .lds-default div {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: cornflowerblue;
+        border-radius: 50%;
+        animation: lds-default 2s ease-in-out infinite;
+    }
+
+        .lds-default div:nth-child(1) {
+            animation-delay: 0s;
+            top: 37px;
+            left: 66px;
+        }
+
+        .lds-default div:nth-child(2) {
+            animation-delay: -0.1s;
+            top: 22px;
+            left: 62px;
+        }
+
+        .lds-default div:nth-child(3) {
+            animation-delay: -0.2s;
+            top: 11px;
+            left: 52px;
+        }
+
+        .lds-default div:nth-child(4) {
+            animation-delay: -0.3s;
+            top: 7px;
+            left: 37px;
+        }
+
+        .lds-default div:nth-child(5) {
+            animation-delay: -0.4s;
+            top: 11px;
+            left: 22px;
+        }
+
+        .lds-default div:nth-child(6) {
+            animation-delay: -0.5s;
+            top: 22px;
+            left: 11px;
+        }
+
+        .lds-default div:nth-child(7) {
+            animation-delay: -0.6s;
+            top: 37px;
+            left: 7px;
+        }
+
+        .lds-default div:nth-child(8) {
+            animation-delay: -0.7s;
+            top: 52px;
+            left: 11px;
+        }
+
+        .lds-default div:nth-child(9) {
+            animation-delay: -0.8s;
+            top: 62px;
+            left: 22px;
+        }
+
+        .lds-default div:nth-child(10) {
+            animation-delay: -0.9s;
+            top: 66px;
+            left: 37px;
+        }
+
+        .lds-default div:nth-child(11) {
+            animation-delay: -1s;
+            top: 62px;
+            left: 52px;
+        }
+
+        .lds-default div:nth-child(12) {
+            animation-delay: -1.1s;
+            top: 52px;
+            left: 62px;
+        }
+
+@keyframes lds-default {
+    0%, 20%, 80%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(2.5);
+    }
+}
+
+@keyframes lds {
+    0%, 20%, 80%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15) rotateZ(360deg);
+    }
+}
+
+.lds div {
+    animation: lds 2s ease-in-out infinite;
+    font-size: 3rem;
+}
+
+    .lds div:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .lds div:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .lds div:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    .lds div:nth-child(4) {
+        animation-delay: 0.6s;
+    }
+
+.lds-text div {
+    animation: lds-text 2s ease-in-out infinite;
+    font-size: 2rem;
+}
+
+    .lds-text div:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .lds-text div:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .lds-text div:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+
+    .lds-text div:nth-child(4) {
+        animation-delay: 0.3s;
+    }
+
+    .lds-text div:nth-child(5) {
+        animation-delay: 0.4s;
+    }
+
+    .lds-text div:nth-child(6) {
+        animation-delay: 0.5s;
+    }
+
+    .lds-text div:nth-child(7) {
+        animation-delay: 0.6s;
+    }
+
+    .lds-text div:nth-child(8) {
+        animation-delay: 0.7s;
+    }
+
+    .lds-text div:nth-child(9) {
+        animation-delay: 0.8s;
+    }
+
+    .lds-text div:nth-child(10) {
+        animation-delay: 0.9s;
+    }
+
+    .lds-text div:nth-child(11) {
+        animation-delay: 1s;
+    }
+
+    .lds-text div:nth-child(12) {
+        animation-delay: 1.1s;
+    }
+
+
+@keyframes lds-text {
+    0%, 20%, 80%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.img--size {
+    width: 414px;
+    height: 232px;
+    object-fit: contain;
+}
