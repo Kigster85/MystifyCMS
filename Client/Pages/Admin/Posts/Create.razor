@@ -69,8 +69,8 @@
                         </div>
                         @*/ Text Field for content to be posted / *@
                         <div class="form-group mb-5">
-                            <label for="postContent">Post content</label>
-                            <InputText @bind-Value="_postToCreate.Content" class="form-control" id="postContent"></InputText>
+                            <label>Post content</label>
+                            <div @ref="_quillJSEditorDiv" class="border border-secondary p-4"></div>
                         </div>
                         @*/ Checkbox for published or not published / *@
                         <div class="form-group mb-5">
@@ -81,7 +81,7 @@
                                 Publishing a blog post also updates the value of the PublishDate field.
                             </div>
                         </div>
-
+                        @*/ Author Details box / *@
                         <div class="form-group mb-5">
                             <label for="postAuthor">Post author</label>
                             <InputText @bind-Value="_postToCreate.Author" class="form-control" id="postAuthor"></InputText>
@@ -106,8 +106,23 @@
 
 @code
 {
-    [Inject] HttpClient HttpClient { get; set; }
     [Inject] InMemoryDatabaseCache InMemoryDatabaseCache { get; set; }
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    private ElementReference _quillJSEditorDiv;
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (InMemoryDatabaseCache.Categories == null)
+            {
+                await InMemoryDatabaseCache.GetCategoriesFromDatabaseAndCache(false);
+                StateHasChanged();
+            }
+            await JSRuntime.InvokeVoidAsync("QuillFunctions.createQuill", _quillJSEditorDiv, true);
+        }
+    }
+
+    [Inject] HttpClient HttpClient { get; set; }
     private PostDTO _postToCreate = new PostDTO() { ThumbnailImagePath = "uploads/placeholder.jpg" };
     private bool _attemptingToCreate = false;
     private bool _attemptToCreateFailed = false;
@@ -115,6 +130,8 @@
     private async Task CreatePost()
     {
         _attemptingToCreate = true;
+
+        _postToCreate.Content = await JSRuntime.InvokeAsync<string>("QuillFunctions.getQuillContent", _quillJSEditorDiv);
 
         HttpResponseMessage response = await HttpClient.PostAsJsonAsync<PostDTO>(APIEndpoints.s_posts, _postToCreate);
 
