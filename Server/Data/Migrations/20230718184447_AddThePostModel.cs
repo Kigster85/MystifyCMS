@@ -77,12 +77,12 @@ namespace Server.Data.Migrations
                 columns: new[] { "PostId", "Author", "CategoryId", "Content", "Excerpt", "PublishDate", "Published", "ThumbnailImagePath", "Title" },
                 values: new object[,]
                 {
-                    { 1, "Philip Billson", 1, "", "This is the excerpt for post 1. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.png", "First Post" },
-                    { 2, "Philip Billson", 2, "", "This is the excerpt for post 2. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.png", "Second Post" },
-                    { 3, "Philip Billson", 3, "", "This is the excerpt for post 3. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.png", "Third Post" },
-                    { 4, "Philip Billson", 1, "", "This is the excerpt for post 4. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.png", "Fourth Post" },
-                    { 5, "Philip Billson", 2, "", "This is the excerpt for post 5. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.png", "Fifth Post" },
-                    { 6, "Philip Billson", 3, "", "This is the excerpt for post 6. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.png", "Sixth Post" }
+                    { 1, "Philip Billson", 1, "", "This is the excerpt for post 1. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.jpg", "First Post" },
+                    { 2, "Philip Billson", 2, "", "This is the excerpt for post 2. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.jpg", "Second Post" },
+                    { 3, "Philip Billson", 3, "", "This is the excerpt for post 3. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.jpg", "Third Post" },
+                    { 4, "Philip Billson", 1, "", "This is the excerpt for post 4. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.jpg", "Fourth Post" },
+                    { 5, "Philip Billson", 2, "", "This is the excerpt for post 5. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.jpg", "Fifth Post" },
+                    { 6, "Philip Billson", 3, "", "This is the excerpt for post 6. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.", "44/18/2023 06:44", true, "uploads/placeholder.jpg", "Sixth Post" }
                 });
 
             migrationBuilder.CreateIndex(
