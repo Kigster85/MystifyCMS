@@ -38,9 +38,12 @@ body {
     object-fit: cover;
     box-shadow: 0.55rem 0.55rem 1.0rem rgba(0, 0, 0, 0.8) !important;
 }
-
+.card-img-top {
+    height: 15rem;
+    width: 100%;
+}
 .card-body {
-    height: 395px;
+    height: 15rem;
 }
 
 .card-title {

@@ -1,0 +1,33 @@
+﻿@page "/blog/{CategoryName}"
+@using Components.Public.Blog
+
+<h3>CategoriesIndex</h3>
+
+@code 
+{
+    [Parameter] public string CategoryName { get; set; }
+    [Inject] InMemoryDatabaseCache InMemoryDatabaseCache { get; set; }
+    private Category _category = null;
+    private List<Post> _publishedPosts = null;
+    protected override async Task OnInitializedAsync()
+    {
+        if (InMemoryDatabaseCache.Categories == null)
+        {
+            await InMemoryDatabaseCache.GetCategoriesFromDatabaseAndCache(false);
+        }
+
+        _category = await InMemoryDatabaseCache.GetCategoryByCategoryName(CategoryName.ConvertURLToTitle(), true, true);
+
+        if (_category.Posts.Count != 0)
+        {
+            _publishedPosts = _category.Posts.Where(post => post.Published == true).ToList();
+        }
+        else
+        {
+            _publishedPosts = new List<Post>();
+        }
+    }
+    //Category - 1 C# in action
+    //Convert code to use Slug/url property instead
+    //category-1-csharp-in-action
+}
