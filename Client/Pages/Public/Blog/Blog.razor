@@ -107,26 +107,26 @@
 
 </main>
 
-<Footer />
+<Client.Components.Public.Shared.Footer />
 
 @implements IDisposable
-@code {
-    [Inject] InMemoryDatabaseCache InMemoryDatabaseCache { get; set; }
+@code
+{
+	[Inject] InMemoryDatabaseCache InMemoryDatabaseCache { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        InMemoryDatabaseCache.OnCategoriesDataChanged += StateHasChanged;
+	protected override async Task OnInitializedAsync()
+	{
+		InMemoryDatabaseCache.OnCategoriesDataChanged += StateHasChanged;
 
-        if (InMemoryDatabaseCache.Categories == null)
-        {
-            await InMemoryDatabaseCache.GetCategoriesFromDatabaseAndCache(true);
-        }
-    }
-    //Unsubscribe from events Dispose(), else we will create a memory leak
+		if (InMemoryDatabaseCache.Categories == null)
+		{
+			await InMemoryDatabaseCache.GetCategoriesFromDatabaseAndCache(true);
+		}
+	}
 
-    public void Dispose()
-    {
-        InMemoryDatabaseCache.OnCategoriesDataChanged -= StateHasChanged;
-    }
+	// Unsubscribe from events Dispose(), else we'll create a memory leak.
+	public void Dispose()
+	{
+		InMemoryDatabaseCache.OnCategoriesDataChanged -= StateHasChanged;
+	}
 }
-
