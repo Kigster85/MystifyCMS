@@ -22,7 +22,9 @@
 
 				@if (_publishedPosts.Count < 1)
 				{
-					<h3>No categories found.</h3>
+					<h3>No posts found in this category.</h3>
+					<a href="/blog" class="btn btn-secondary shadow">
+						<i class="fas fa-arrow-left"></i> Back to all Categories.</a>
 				}
 				else if (_publishedPosts.Count < 3)
 				{
