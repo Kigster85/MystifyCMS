@@ -83,7 +83,7 @@ namespace Server.Data
                 postsToSeed[i - 1] = new Post
                 {
                     PostId = i,
-                    ThumbnailImagePath = "uploads/placeholder.png",
+                    ThumbnailImagePath = "uploads/placeholder.jpg",
                     Title = postTitle,
                     Excerpt = $"This is the excerpt for post {i}. As excerpt is a little extraction from a larger piece of text. Sort of like a preview.",
                     Content = string.Empty,
