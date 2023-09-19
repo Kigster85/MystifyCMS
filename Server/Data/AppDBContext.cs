@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shared.Models;
 
@@ -98,7 +99,55 @@ namespace Server.Data
             modelBuilder.Entity<Post>().HasData(postsToSeed);
             #endregion
 
+            #region Administrator Role Seed
 
+            const string administratorRoleName = "Administrator";
+
+            IdentityRole administratorRoleToSeed = new()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = administratorRoleName,
+                NormalizedName = administratorRoleName.ToUpperInvariant()
+            };
+
+            modelBuilder.Entity<IdentityRole>().HasData(administratorRoleToSeed);
+            #endregion
+
+            #region Administrator user seed
+
+            const string administratorUserEmail = "admin@ootb.uk";
+
+            var passwordHasher = new PasswordHasher<IdentityUser>();
+
+            IdentityUser administratorUserToSeed = new()
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = administratorUserEmail,
+                NormalizedUserName = administratorUserEmail.ToUpperInvariant(),
+                Email = administratorUserEmail,
+                NormalizedEmail = administratorUserEmail.ToUpperInvariant(),
+                PasswordHash = string.Empty,
+            };
+
+            string hashedPassword = passwordHasher.HashPassword(administratorUserToSeed, "Password1");
+
+            administratorUserToSeed.PasswordHash = hashedPassword;
+
+            modelBuilder.Entity<IdentityUser>().HasData(administratorUserToSeed);
+
+            #endregion
+
+            #region Add the Adminstrator user to the administrator role
+
+            IdentityUserRole<string> identityUserRoleToSeed = new()
+            {
+                RoleId = administratorRoleToSeed.Id,
+                UserId = administratorUserToSeed.Id,
+            };
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(identityUserRoleToSeed);
+
+            #endregion
         }
     }
 }
