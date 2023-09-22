@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Shared.Models;
@@ -9,6 +10,7 @@ namespace Server.Controllers
     [Route("api/[controller]")]
     //To tell the program it is an api controller which uses http reltated requests
     [ApiController]
+    [Authorize(Roles = "Administrator")]
 
     public class CategoriesController : ControllerBase
     {
@@ -24,7 +26,7 @@ namespace Server.Controllers
         #region CRUD Operations
 
         [HttpGet]
-
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             List<Category> categories = await _appDBContext.Categories.ToListAsync();
@@ -35,7 +37,9 @@ namespace Server.Controllers
         //website.com/api/categories/withposts
 
         [HttpGet("withposts")]
-         public async Task<IActionResult> GetWithPosts()
+        [AllowAnonymous]
+
+        public async Task<IActionResult> GetWithPosts()
         {
             List<Category> categories = await _appDBContext.Categories
                 .Include(category => category.Posts)
@@ -46,6 +50,8 @@ namespace Server.Controllers
 
         //website.com/api/categories/id (1,2,3,4 etc)
         [HttpGet("{id}")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> Get(int id)
         {
             Category category = await GetCategoryByCategoryId(id, false);
@@ -55,6 +61,8 @@ namespace Server.Controllers
 
         //website.com/api/categories/id (1,2,3,4 etc)
         [HttpGet("withposts/{id}")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> GetWithPosts(int id)
         {
             Category category = await GetCategoryByCategoryId(id, true);
