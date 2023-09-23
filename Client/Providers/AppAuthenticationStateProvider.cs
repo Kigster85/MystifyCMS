@@ -19,7 +19,7 @@ namespace Client.Providers
         {
             try
             {
-                string savedToken = await _localStorageService.GetItemAsStringAsync(LocalStorageBearerTokenKeyName);
+                string savedToken = await _localStorageService.GetItemAsync<string>(LocalStorageBearerTokenKeyName);
 
                 if (string.IsNullOrWhiteSpace(savedToken))
                 {
@@ -48,7 +48,7 @@ namespace Client.Providers
 
         internal async Task SignIn()
         {
-            string savedToken = await _localStorageService.GetItemAsStringAsync(LocalStorageBearerTokenKeyName);
+            string savedToken = await _localStorageService.GetItemAsync<string>(LocalStorageBearerTokenKeyName);
 
             JwtSecurityToken jwtSecurityToken = _jwtSecurityTokenHandler.ReadJwtToken(savedToken);
 

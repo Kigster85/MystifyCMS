@@ -38,19 +38,15 @@
             </li>
             <li class="nav-item">
                 <a href="@TrainingPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(TrainingPageUri) ? "active" : string.Empty)">
-                    Training
+                Training
                 </a>
             </li>
             <li class="nav-item">
                 <a href="@ContactPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(ContactPageUri) ? "active" : string.Empty)">
-                    Contact
+                Contact
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="@LoginPageUri" class="navlink mx-5 md-and-smaller-my-3 @(IsPageActive(LoginPageUri) ? "active" : string.Empty)">
-                    Login
-                </a>
-            </li>
+
         </ul>
 
     </div>
@@ -64,7 +60,6 @@
     //List of pages within the website and the uri string prefix for them.
 
     private const string HomePageUri = "/";
-    private const string LoginPageUri = "/login";
     private const string BlogPageUri = "/blog";
     private const string SkillsPageUri = "/skills";
     private const string PortfolioPageUri = "/Portfolio";
