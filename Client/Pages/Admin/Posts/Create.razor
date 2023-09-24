@@ -1,6 +1,8 @@
 ﻿@page "/admin/posts/create"
 @using System.Net;
 
+<AuthorizeView Roles="Administrator">
+    <Authorized Context="Auth">
 <main class="admin-area-main">
     <Sidebar />
 
@@ -103,7 +105,12 @@
         </div>
     </div>
 </main>
+    </Authorized>
 
+    <NotAuthorized>
+        <SignIn />
+    </NotAuthorized>
+</AuthorizeView>
 @code
 {
     [Inject] InMemoryDatabaseCache InMemoryDatabaseCache { get; set; }
