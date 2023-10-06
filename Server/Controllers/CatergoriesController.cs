@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Shared.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    //routing for the api to display the url
     [Route("api/[controller]")]
-    //To tell the program it is an api controller which uses http reltated requests
     [ApiController]
     [Authorize(Roles = "Administrator")]
-
     public class CategoriesController : ControllerBase
     {
         private readonly AppDBContext _appDBContext;
@@ -23,7 +25,7 @@ namespace Server.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        #region CRUD Operations
+        #region CRUD operations
 
         [HttpGet]
         [AllowAnonymous]
@@ -34,11 +36,10 @@ namespace Server.Controllers
             return Ok(categories);
         }
 
-        //website.com/api/categories/withposts
 
+        // website.com/api/categories/withposts
         [HttpGet("withposts")]
         [AllowAnonymous]
-
         public async Task<IActionResult> GetWithPosts()
         {
             List<Category> categories = await _appDBContext.Categories
@@ -48,10 +49,9 @@ namespace Server.Controllers
             return Ok(categories);
         }
 
-        //website.com/api/categories/id (1,2,3,4 etc)
+        // website.com/api/categories/2
         [HttpGet("{id}")]
         [AllowAnonymous]
-
         public async Task<IActionResult> Get(int id)
         {
             Category category = await GetCategoryByCategoryId(id, false);
@@ -59,10 +59,9 @@ namespace Server.Controllers
             return Ok(category);
         }
 
-        //website.com/api/categories/id (1,2,3,4 etc)
+        // website.com/api/categories/2
         [HttpGet("withposts/{id}")]
         [AllowAnonymous]
-
         public async Task<IActionResult> GetWithPosts(int id)
         {
             Category category = await GetCategoryByCategoryId(id, true);
@@ -79,17 +78,19 @@ namespace Server.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                if (ModelState.IsValid == false) 
+
+                if (ModelState.IsValid == false)
                 {
                     return BadRequest(ModelState);
                 }
+
                 await _appDBContext.Categories.AddAsync(categoryToCreate);
 
                 bool changesPersistedToDatabase = await PersistChangesToDatabase();
 
-                if(changesPersistedToDatabase == false) 
+                if (changesPersistedToDatabase == false)
                 {
-                    return StatusCode(500, "Something went wrong on our side. Please Contact the Administrator.");
+                    return StatusCode(500, "Something went wrong on our side. Please contact the administrator.");
                 }
                 else
                 {
@@ -98,12 +99,13 @@ namespace Server.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500,$"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}");
+                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}.");
             }
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id,[FromBody] Category updatedCategory)
+
+        public async Task<IActionResult> Update(int id, [FromBody] Category updatedCategory)
         {
             try
             {
@@ -118,6 +120,7 @@ namespace Server.Controllers
                 {
                     return NotFound();
                 }
+
                 if (ModelState.IsValid == false)
                 {
                     return BadRequest(ModelState);
@@ -129,7 +132,7 @@ namespace Server.Controllers
 
                 if (changesPersistedToDatabase == false)
                 {
-                    return StatusCode(500, "Something went wrong on our side. Please Contact the Administrator.");
+                    return StatusCode(500, "Something went wrong on our side. Please contact the administrator.");
                 }
                 else
                 {
@@ -138,7 +141,7 @@ namespace Server.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}");
+                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}.");
             }
         }
 
@@ -158,27 +161,28 @@ namespace Server.Controllers
                 {
                     return NotFound();
                 }
+
                 if (ModelState.IsValid == false)
                 {
                     return BadRequest(ModelState);
                 }
+
                 Category categoryToDelete = await GetCategoryByCategoryId(id, false);
 
                 if (categoryToDelete.ThumbnailImagePath != "uploads/placeholder.jpg")
                 {
+                    string fileName = categoryToDelete.ThumbnailImagePath.Split('/').Last();
 
-                    string filename = categoryToDelete.ThumbnailImagePath.Split('/').Last();
-
-                    System.IO.File.Delete($"{_webHostEnvironment.ContentRootPath}\\wwwroot\\uploads\\{filename}");
-
+                    System.IO.File.Delete($"{_webHostEnvironment.ContentRootPath}\\wwwroot\\uploads\\{fileName}");
                 }
+
                 _appDBContext.Categories.Remove(categoryToDelete);
 
                 bool changesPersistedToDatabase = await PersistChangesToDatabase();
 
                 if (changesPersistedToDatabase == false)
                 {
-                    return StatusCode(500, "Something went wrong on our side. Please Contact the Administrator.");
+                    return StatusCode(500, "Something went wrong on our side. Please contact the administrator.");
                 }
                 else
                 {
@@ -187,13 +191,12 @@ namespace Server.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}");
+                return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}.");
             }
         }
 
         #endregion
 
-        //Utility Methods
         #region Utility methods
 
         [NonAction]
@@ -204,6 +207,7 @@ namespace Server.Controllers
 
             return amountOfChanges > 0;
         }
+
         [NonAction]
         [ApiExplorerSettings(IgnoreApi = true)]
         private async Task<Category> GetCategoryByCategoryId(int categoryId, bool withPosts)
@@ -223,9 +227,6 @@ namespace Server.Controllers
             }
 
             return categoryToGet;
-
-            
-
         }
 
         #endregion

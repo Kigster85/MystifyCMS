@@ -6,7 +6,7 @@
 
 <main class="admin-area-main">
 
-	<Client.Components.Admin.Sidebar />
+	<Sidebar />
 
 	<div class="admin-area-content container-fluid bg-white">
 		<div class="row g-0">
@@ -18,7 +18,7 @@
 
 				@if (InMemoryDatabaseCache.Categories == null || _attemptingToDeleteACategory == true)
 				{
-					<LoadingDot />
+					<Loading />
 				}
 				else
 				{					

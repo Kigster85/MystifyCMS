@@ -14,9 +14,8 @@ namespace Server.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-    [Authorize(Roles = "Administrator")]
-
-    public class PostsController : ControllerBase
+	[Authorize(Roles = "Administrator")]
+	public class PostsController : ControllerBase
 	{
 		private readonly AppDBContext _appDBContext;
 		private readonly IWebHostEnvironment _webHostEnvironment;
@@ -32,9 +31,8 @@ namespace Server.Controllers
 		#region CRUD operations
 
 		[HttpGet]
-        [AllowAnonymous]
-
-        public async Task<IActionResult> Get()
+		[AllowAnonymous]
+		public async Task<IActionResult> Get()
 		{
 			List<Post> posts = await _appDBContext.Posts
 				.Include(post => post.Category)
@@ -44,9 +42,8 @@ namespace Server.Controllers
 		}
 
 		[HttpGet("dto/{id}")]
-        [AllowAnonymous]
-
-        public async Task<IActionResult> GetDTO(int id)
+		[AllowAnonymous]
+		public async Task<IActionResult> GetDTO(int id)
 		{
 			Post post = await GetPostByPostId(id);
 			PostDTO postDTO = _mapper.Map<PostDTO>(post);
@@ -56,9 +53,8 @@ namespace Server.Controllers
 
 		// website.com/api/posts/2
 		[HttpGet("{id}")]
-        [AllowAnonymous]
-
-        public async Task<IActionResult> Get(int id)
+		[AllowAnonymous]
+		public async Task<IActionResult> Get(int id)
 		{
 			Post post = await GetPostByPostId(id);
 
@@ -110,63 +106,59 @@ namespace Server.Controllers
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, [FromBody] PostDTO updatedPostDTO)
 		{
-			try
+
+			if (id < 1 || updatedPostDTO == null || id != updatedPostDTO.PostId)
 			{
-				if (id < 1 || updatedPostDTO == null || id != updatedPostDTO.PostId)
+				return BadRequest(ModelState);
+			}
+
+			Post oldPost = await _appDBContext.Posts.FindAsync(id);
+
+			if (oldPost == null)
+			{
+				return NotFound();
+			}
+
+			if (ModelState.IsValid == false)
+			{
+				return BadRequest(ModelState);
+			}
+
+			Post updatedPost = _mapper.Map<Post>(updatedPostDTO);
+
+			if (updatedPost.Published == true)
+			{
+				if (oldPost.Published == false)
 				{
-					return BadRequest(ModelState);
-				}
-
-				Post oldPost = await _appDBContext.Posts.FindAsync(id);
-
-				if (oldPost == null)
-				{
-					return NotFound();
-				}
-
-				if (ModelState.IsValid == false)
-				{
-					return BadRequest(ModelState);
-				}
-
-				Post updatedPost = _mapper.Map<Post>(updatedPostDTO);
-
-				if (updatedPost.Published == true)
-				{
-					if (oldPost.Published == false)
-					{
-						updatedPost.PublishDate = DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm");
-					}
-					else
-					{
-						updatedPost.PublishDate = oldPost.PublishDate;
-					}
+					updatedPost.PublishDate = DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm");
 				}
 				else
 				{
-					updatedPost.PublishDate = string.Empty;
-				}
-
-				// Detach oldPost from EF, else it can't be updated.
-				_appDBContext.Entry(oldPost).State = EntityState.Detached;
-
-				_appDBContext.Posts.Update(updatedPost);
-
-				bool changesPersistedToDatabase = await PersistChangesToDatabase();
-
-				if (changesPersistedToDatabase == false)
-				{
-					return StatusCode(500, "Something went wrong on our side. Please contact the administrator.");
-				}
-				else
-				{
-					return Created("Create", updatedPost);
+					updatedPost.PublishDate = oldPost.PublishDate;
 				}
 			}
-			catch (Exception e)
+			else
 			{
-				return StatusCode(500, $"Something went wrong on our side. Please contact the administrator. Error message: {e.Message}.");
+				updatedPost.PublishDate = string.Empty;
 			}
+
+			// Detach oldPost from EF, else it can't be updated.
+			_appDBContext.Entry(oldPost).State = EntityState.Detached;
+
+			_appDBContext.Posts.Update(updatedPost);
+
+			bool changesPersistedToDatabase = await PersistChangesToDatabase();
+
+			if (changesPersistedToDatabase == false)
+			{
+				return StatusCode(500, "Something went wrong on our side. Please contact the administrator.");
+			}
+			else
+			{
+				return Created("Create", updatedPost);
+			}
+
+
 		}
 
 		[HttpDelete("{id}")]

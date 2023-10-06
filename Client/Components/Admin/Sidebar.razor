@@ -34,6 +34,8 @@
 
 @code 
 {
+    protected override async Task OnInitializedAsync() => await SignInWithBrowserLocalStorageBearerToken();
+
     [Inject] HttpClient HttpClient { get; set; }
     [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     [Inject] ILocalStorageService LocalStorageService { get; set; }
