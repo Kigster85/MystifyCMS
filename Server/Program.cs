@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container
 builder.Services.AddCors(options =>
 {
-	options.AddPolicy("DevPortfolioPolicy",
+	options.AddPolicy("GIASPolicy",
 					builder =>
 					builder
 					.AllowAnyOrigin()
@@ -73,7 +73,7 @@ app.UseSwaggerUI(swaggerUIOptions =>
 	swaggerUIOptions.SwaggerEndpoint("/swagger/v1/swagger.json", "MystifyAPI");
 	swaggerUIOptions.RoutePrefix = string.Empty;
 });
-app.UseCors("DevPortfolioPolicy");
+app.UseCors("GIASPolicy");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
