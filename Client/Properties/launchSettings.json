@@ -21,7 +21,7 @@
         "ProductionClient": {
             "commandName": "Project",
             "dotnetRunMessages": true,
-            "launchBrowser": false,
+            "launchBrowser": true,
             "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
             "applicationUrl": "https://devportfolio.ootb.uk", // Update this to your production URL
             "environmentVariables": {

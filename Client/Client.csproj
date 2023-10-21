@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Components\Public\Ecommerce\" />
-    <Folder Include="Components\Public\Products\" />
+    <Folder Include="Components\Public\Ecommerce\Products\" />
     <Folder Include="wwwroot\assets\docs\" />
     <Folder Include="wwwroot\assets\img\skillsicons\" />
     <Folder Include="wwwroot\assets\img\publicbackgrounds\" />

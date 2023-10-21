@@ -16,12 +16,12 @@
             <div class="row mt-4">
                 <div class="col-md-4 my-2">
                     <div class="card shadow">
-                        <img src="assets/img/publicbackgrounds/bg-motherboard.jpg" alt="Portfolio project thumbnail image" />
+                        <img src="/assets/img/website-banner-top-fancy.png" alt="Games in a Snap Portfolio project thumbnail image" />
 
                         <div class="card-body">
-                            <h3 class="card-title fw-bold">My First Project</h3>
+                            <h3 class="card-title fw-bold">Games in a Snap Website</h3>
                             <p class="card-text">
-                                @(String.Join(" ", _exampleExcerpt.Split().Take(43).ToArray()))...
+                                @(String.Join(" ", _giasText.Split().Take(43).ToArray()))...
                             </p>
                         </div>
 
@@ -75,6 +75,9 @@
 {
     private bool _showingExamplePortfolioProjectModalWindow = false;
 
+    private string _giasText = "Games in a Snap is a community run twitch speed build event, it is hosted by and run by community members who give up their free time to run this event." +
+                                " I am happy to give my free time to this event, having taken part in it many times in the past, now moving on to a more involved role.";
+
     private string _exampleExcerpt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida eget tellus nec ornare." +
                                     " Mauris ac nisi sit amet erat feugiat consequat id sit amet erat. Integer at erat vitae est volutpat gravida sit amet nec velit." +
                                     " Phasellus et faucibus ex, id feugiat mi. Etiam justo est, sodales nec convallis non, pulvinar in nulla." +
@@ -83,4 +86,6 @@
                                     " tempus nisl et tellus efficitur, ac facilisis sapien tristique. Etiam interdum nisl nec aliquet semper." +
                                     " Curabitur sagittis leo enim, sit amet pretium nisi facilisis id. Donec non maximus nulla, vel dapibus urna." +
                                     " Aenean a lectus nibh. Nullam luctus vel magna id fermentum.";
+
+
 }
